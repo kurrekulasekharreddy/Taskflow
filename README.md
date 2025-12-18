@@ -3,7 +3,7 @@
 A mobile-first Single Page Application (SPA) for task management built with vanilla JavaScript ES6 modules, Node.js/Express backend, and MongoDB database.
 
 ## Project Architecture
-
+'''
 ### Backend (Node.js/Express)
 src/
 ├── server.js              # Main Express server (port 5000)
@@ -19,7 +19,7 @@ src/
     ├── users.js           # User CRUD operations
     └── stats.js           # Statistics endpoint
 
-
+'''
 ### Frontend (Vanilla JavaScript)
 
 public/
@@ -33,6 +33,8 @@ public/
         ├── UIController.js    # UI management class
         ├── FormValidator.js   # Form validation class
         └── DataManager.js     # Data state management class
+
+'''
 
 ## Application Views
 
@@ -82,7 +84,7 @@ public/
 ## Development
 
 ### Project Structure
-
+'''
 taskflow/
 ├── public/                # Frontend files
 ├── src/                   # Backend files
@@ -91,6 +93,7 @@ taskflow/
 ├── .gitignore            # Git ignore rules
 ├── package.json          # Dependencies
 └── README.md             # This file 
+'''
 
 ### Technologies Used
 
