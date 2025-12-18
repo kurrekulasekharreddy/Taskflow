@@ -5,7 +5,6 @@ A mobile-first Single Page Application (SPA) for task management built with vani
 ## Project Architecture
 
 ### Backend (Node.js/Express)
-```
 src/
 ├── server.js              # Main Express server (port 5000)
 ├── models/                # Mongoose ODM models
@@ -19,10 +18,10 @@ src/
     ├── notes.js           # Notes CRUD operations
     ├── users.js           # User CRUD operations
     └── stats.js           # Statistics endpoint
-```
+
 
 ### Frontend (Vanilla JavaScript)
-```
+
 public/
 ├── index.html             # Single HTML page with 11+ views
 ├── css/
@@ -91,8 +90,7 @@ taskflow/
 ├── .env.example           # Environment template
 ├── .gitignore            # Git ignore rules
 ├── package.json          # Dependencies
-└── README.md             # This file
-```
+└── README.md             # This file 
 
 ### Technologies Used
 
