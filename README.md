@@ -1,45 +1,6 @@
-
 # TaskFlow - Task Manager SPA
 
 A mobile-first Single Page Application (SPA) for task management built with vanilla JavaScript ES6 modules, Node.js/Express backend, and MongoDB database.
-
-## Academic Requirements Met
-
-### CSS Requirements
-- 10+ descendant selectors
-- 10+ adjacent selectors
-- 20+ class selectors
-- 20+ ID selectors
-- 15+ pseudo-element selectors (::before, ::after)
-- 15+ pseudo-class selectors (:hover, :focus, :checked)
-
-### JavaScript Requirements
-- ES6 modules architecture (all imports/exports)
-- 50+ event handlers (click, input, change, submit, scroll, etc.)
-- 3+ ES6 classes with 5+ methods and 4+ attributes each:
-  - `ApiService` - HTTP/fetch wrapper
-  - `UIController` - UI management
-  - `FormValidator` - Form validation
-  - `DataManager` - Data state management
-- Only 1 global function (DOMContentLoaded)
-- Mix of function types: expressions, class methods, arrow functions, anonymous
-- 12+ AJAX invocations using fetch API
-
-### Database Requirements
-- MongoDB with Mongoose ODM
-- Full CRUD operations (Create, Retrieve, Update, Delete)
-- Multiple collections: Tasks, Categories, Notes, Users
-
-### Backend Requirements
-- Node.js/Express server
-- 10+ API routes across 5 route files
-- Error handling and validation
-
-### Application Features
-- Mobile-first responsive design
-- 11 distinct views (Dashboard, Tasks, Task Form, Categories, Category Form, Notes, Note Form, Calendar, Profile, Settings, Help, About)
-- No page reloads (SPA navigation)
-- Error-free console
 
 ## Project Architecture
 
@@ -73,82 +34,6 @@ public/
         ├── UIController.js    # UI management class
         ├── FormValidator.js   # Form validation class
         └── DataManager.js     # Data state management class
-```
-
-## Getting Started
-
-### Prerequisites
-
-1. Node.js (v20 or higher)
-2. MongoDB (Local installation or MongoDB Atlas account)
-
-### Local MongoDB Setup
-
-#### Option 1: Install MongoDB Locally
-
-**macOS (using Homebrew):**
-```bash
-brew tap mongodb/brew
-brew install mongodb-community
-brew services start mongodb-community
-```
-
-**Ubuntu/Debian:**
-```bash
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-sudo systemctl start mongod
-```
-
-**Windows:**
-Download from MongoDB Download Center (https://www.mongodb.com/try/download/community) and follow installation wizard.
-
-#### Option 2: Use MongoDB Atlas (Cloud)
-
-1. Sign up at MongoDB Atlas (https://www.mongodb.com/cloud/atlas)
-2. Create a free cluster
-3. Get your connection string
-4. Update `.env` with your Atlas connection string
-
-### Installation
-
-1. Clone or download the project
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Configure environment variables:
-
-Copy `.env.example` to `.env` and update values:
-```bash
-cp .env.example .env
-```
-
-For local MongoDB:
-```env
-MONGODB_URI=mongodb://localhost:27017/taskflow
-PORT=5000
-NODE_ENV=development
-```
-
-For MongoDB Atlas:
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/taskflow
-PORT=5000
-NODE_ENV=development
-```
-
-4. Start the application:
-```bash
-npm start
-```
-
-5. Access the application:
-Open your browser to: http://localhost:5000
 
 ## Application Views
 
