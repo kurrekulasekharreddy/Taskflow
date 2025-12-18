@@ -257,10 +257,3 @@ This project fulfills all requirements for the Modern Web Development course:
 - 10+ API routes
 - SPA with 11+ views
 
-## License
-
-Academic project - All rights reserved
-
-## Author
-
-Created for Modern Web Development Course
