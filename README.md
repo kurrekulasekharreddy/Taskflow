@@ -83,7 +83,7 @@ public/
 ## Development
 
 ### Project Structure
-```
+
 taskflow/
 ├── public/                # Frontend files
 ├── src/                   # Backend files
