@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Task Manager</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <nav id="navbar">
+            <div id="nav-brand">
+                <span id="logo">TaskFlow</span>
+            </div>
+            <button id="menu-toggle" type="button" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul id="nav-links">
+                <li><a href="#" data-view="dashboard" class="nav-link active">Dashboard</a></li>
+                <li><a href="#" data-view="tasks" class="nav-link">Tasks</a></li>
+                <li><a href="#" data-view="categories" class="nav-link">Categories</a></li>
+                <li><a href="#" data-view="notes" class="nav-link">Notes</a></li>
+                <li><a href="#" data-view="calendar" class="nav-link">Calendar</a></li>
+                <li><a href="#" data-view="profile" class="nav-link">Profile</a></li>
+                <li><a href="#" data-view="settings" class="nav-link">Settings</a></li>
+                <li><a href="#" data-view="help" class="nav-link">Help</a></li>
+                <li><a href="#" data-view="about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+            <section id="view-dashboard" class="view active">
+                <header class="view-header">
+                    <h1 id="dashboard-title">Dashboard</h1>
+                    <p id="dashboard-subtitle">Welcome to TaskFlow</p>
+                </header>
+                <div id="stats-container" class="card-grid">
+                    <div id="stat-total" class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-value" id="stat-total-value">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div id="stat-pending" class="stat-card pending">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-value" id="stat-pending-value">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div id="stat-progress" class="stat-card progress">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-value" id="stat-progress-value">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                    <div id="stat-completed" class="stat-card completed">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="stat-completed-value">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                </div>
+                <div id="recent-tasks">
+                    <h2 id="recent-tasks-title">Recent Tasks</h2>
+                    <div id="recent-tasks-list" class="task-list"></div>
+                </div>
+                <div id="quick-actions">
+                    <button id="quick-add-task" class="btn btn-primary" type="button">Add New Task</button>
+                    <button id="quick-add-note" class="btn btn-secondary" type="button">Add Quick Note</button>
+                </div>
+            </section>
+
+            <section id="view-tasks" class="view">
+                <header class="view-header">
+                    <h1 id="tasks-title">Tasks</h1>
+                    <div id="task-filters">
+                        <input type="text" id="task-search" placeholder="Search tasks..." class="search-input">
+                        <select id="filter-status" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <select id="filter-priority" class="filter-select">
+                            <option value="">All Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </header>
+                <button id="add-task-btn" class="btn btn-primary fab" type="button">+</button>
+                <div id="tasks-list" class="task-list"></div>
+            </section>
+
+            <section id="view-task-form" class="view">
+                <header class="view-header">
+                    <button id="task-form-back" class="btn btn-icon" type="button">&larr;</button>
+                    <h1 id="task-form-title">New Task</h1>
+                </header>
+                <form id="task-form" class="form">
+                    <input type="hidden" id="task-id">
+                    <div class="form-group">
+                        <label for="task-title-input" id="label-task-title">Title</label>
+                        <input type="text" id="task-title-input" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-description-input" id="label-task-desc">Description</label>
+                        <textarea id="task-description-input" rows="4" class="form-textarea"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-category-input" id="label-task-category">Category</label>
+                            <select id="task-category-input" class="form-select"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-priority-input" id="label-task-priority">Priority</label>
+                            <select id="task-priority-input" class="form-select">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-status-input" id="label-task-status">Status</label>
+                            <select id="task-status-input" class="form-select">
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-due-date-input" id="label-task-due">Due Date</label>
+                            <input type="date" id="task-due-date-input" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="task-submit-btn" class="btn btn-primary">Save Task</button>
+                        <button type="button" id="task-cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="task-delete-btn" class="btn btn-danger hidden">Delete</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="view-categories" class="view">
+                <header class="view-header">
+                    <h1 id="categories-title">Categories</h1>
+                </header>
+                <button id="add-category-btn" class="btn btn-primary fab" type="button">+</button>
+                <div id="categories-list" class="category-grid"></div>
+            </section>
+
+            <section id="view-category-form" class="view">
+                <header class="view-header">
+                    <button id="category-form-back" class="btn btn-icon" type="button">&larr;</button>
+                    <h1 id="category-form-title">New Category</h1>
+                </header>
+                <form id="category-form" class="form">
+                    <input type="hidden" id="category-id">
+                    <div class="form-group">
+                        <label for="category-name-input" id="label-cat-name">Name</label>
+                        <input type="text" id="category-name-input" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="category-color-input" id="label-cat-color">Color</label>
+                        <input type="color" id="category-color-input" value="#3498db" class="form-color">
+                    </div>
+                    <div class="form-group">
+                        <label for="category-icon-input" id="label-cat-icon">Icon</label>
+                        <select id="category-icon-input" class="form-select">
+                            <option value="folder">📁 Folder</option>
+                            <option value="work">💼 Work</option>
+                            <option value="personal">👤 Personal</option>
+                            <option value="shopping">🛒 Shopping</option>
+                            <option value="health">❤️ Health</option>
+                            <option value="education">📚 Education</option>
+                            <option value="finance">💰 Finance</option>
+                            <option value="travel">✈️ Travel</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="category-submit-btn" class="btn btn-primary">Save</button>
+                        <button type="button" id="category-cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="category-delete-btn" class="btn btn-danger hidden">Delete</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="view-notes" class="view">
+                <header class="view-header">
+                    <h1 id="notes-title">Notes</h1>
+                    <input type="text" id="note-search" placeholder="Search notes..." class="search-input">
+                </header>
+                <button id="add-note-btn" class="btn btn-primary fab" type="button">+</button>
+                <div id="notes-list" class="notes-grid"></div>
+            </section>
+
+            <section id="view-note-form" class="view">
+                <header class="view-header">
+                    <button id="note-form-back" class="btn btn-icon" type="button">&larr;</button>
+                    <h1 id="note-form-title">New Note</h1>
+                </header>
+                <form id="note-form" class="form">
+                    <input type="hidden" id="note-id">
+                    <div class="form-group">
+                        <label for="note-title-input" id="label-note-title">Title</label>
+                        <input type="text" id="note-title-input" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="note-content-input" id="label-note-content">Content</label>
+                        <textarea id="note-content-input" rows="8" required class="form-textarea"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="note-color-input" id="label-note-color">Color</label>
+                            <div id="color-picker" class="color-picker">
+                                <button type="button" class="color-option" data-color="#ffffa5" style="background:#ffffa5"></button>
+                                <button type="button" class="color-option" data-color="#a5ffff" style="background:#a5ffff"></button>
+                                <button type="button" class="color-option" data-color="#ffa5ff" style="background:#ffa5ff"></button>
+                                <button type="button" class="color-option" data-color="#a5ffa5" style="background:#a5ffa5"></button>
+                                <button type="button" class="color-option" data-color="#ffa5a5" style="background:#ffa5a5"></button>
+                                <button type="button" class="color-option" data-color="#a5a5ff" style="background:#a5a5ff"></button>
+                            </div>
+                            <input type="hidden" id="note-color-input" value="#ffffa5">
+                        </div>
+                        <div class="form-group">
+                            <label id="label-note-pin">Pin Note</label>
+                            <label class="toggle">
+                                <input type="checkbox" id="note-pinned-input">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="note-submit-btn" class="btn btn-primary">Save</button>
+                        <button type="button" id="note-cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="note-delete-btn" class="btn btn-danger hidden">Delete</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="view-calendar" class="view">
+                <header class="view-header">
+                    <h1 id="calendar-title">Calendar</h1>
+                    <div id="calendar-nav">
+                        <button id="cal-prev" class="btn btn-icon" type="button">&lt;</button>
+                        <span id="calendar-month">January 2024</span>
+                        <button id="cal-next" class="btn btn-icon" type="button">&gt;</button>
+                    </div>
+                </header>
+                <div id="calendar-grid" class="calendar-container">
+                    <div class="calendar-header">
+                        <div class="calendar-day-name">Sun</div>
+                        <div class="calendar-day-name">Mon</div>
+                        <div class="calendar-day-name">Tue</div>
+                        <div class="calendar-day-name">Wed</div>
+                        <div class="calendar-day-name">Thu</div>
+                        <div class="calendar-day-name">Fri</div>
+                        <div class="calendar-day-name">Sat</div>
+                    </div>
+                    <div id="calendar-days" class="calendar-body"></div>
+                </div>
+                <div id="calendar-tasks">
+                    <h2 id="selected-date-title">Tasks for Today</h2>
+                    <div id="calendar-task-list" class="task-list"></div>
+                </div>
+            </section>
+
+            <section id="view-profile" class="view">
+                <header class="view-header">
+                    <h1 id="profile-title">Profile</h1>
+                </header>
+                <div id="profile-container" class="profile-card">
+                    <div id="profile-avatar" class="avatar-large">👤</div>
+                    <form id="profile-form" class="form">
+                        <div class="form-group">
+                            <label for="profile-username" id="label-profile-user">Username</label>
+                            <input type="text" id="profile-username" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email" id="label-profile-email">Email</label>
+                            <input type="email" id="profile-email" class="form-input">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" id="profile-save-btn" class="btn btn-primary">Save Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-settings" class="view">
+                <header class="view-header">
+                    <h1 id="settings-title">Settings</h1>
+                </header>
+                <div id="settings-container" class="settings-list">
+                    <div class="setting-item">
+                        <label for="setting-theme" id="label-setting-theme">Dark Mode</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-theme">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="setting-notifications" id="label-setting-notif">Notifications</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-notifications" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="setting-sound" id="label-setting-sound">Sound Effects</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-sound">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="setting-language" id="label-setting-lang">Language</label>
+                        <select id="setting-language" class="form-select">
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                        </select>
+                    </div>
+                    <div id="settings-actions" class="form-actions">
+                        <button id="export-data-btn" class="btn btn-secondary" type="button">Export Data</button>
+                        <button id="clear-data-btn" class="btn btn-danger" type="button">Clear All Data</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-help" class="view">
+                <header class="view-header">
+                    <h1 id="help-title">Help & FAQ</h1>
+                </header>
+                <div id="help-container" class="help-list">
+                    <details class="help-item">
+                        <summary id="help-q1">How do I create a task?</summary>
+                        <p id="help-a1">Click the + button on the Tasks page or use the Quick Add button on the Dashboard.</p>
+                    </details>
+                    <details class="help-item">
+                        <summary id="help-q2">How do I organize tasks?</summary>
+                        <p id="help-a2">Use categories to group related tasks. You can create custom categories with colors and icons.</p>
+                    </details>
+                    <details class="help-item">
+                        <summary id="help-q3">Can I set due dates?</summary>
+                        <p id="help-a3">Yes! When creating or editing a task, set the due date field. Tasks will appear on the calendar.</p>
+                    </details>
+                    <details class="help-item">
+                        <summary id="help-q4">How do notes work?</summary>
+                        <p id="help-a4">Notes are quick text snippets. Pin important notes to keep them at the top.</p>
+                    </details>
+                    <details class="help-item">
+                        <summary id="help-q5">Can I export my data?</summary>
+                        <p id="help-a5">Go to Settings and click Export Data to download all your tasks and notes.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section id="view-about" class="view">
+                <header class="view-header">
+                    <h1 id="about-title">About TaskFlow</h1>
+                </header>
+                <div id="about-container" class="about-content">
+                    <div id="about-logo" class="about-logo">TaskFlow</div>
+                    <p id="about-version">Version 1.0.0</p>
+                    <p id="about-description">TaskFlow is a modern task management application designed to help you stay organized and productive.</p>
+                    <div id="about-features">
+                        <h2 id="features-title">Features</h2>
+                        <ul id="features-list">
+                            <li>Create and manage tasks</li>
+                            <li>Organize with categories</li>
+                            <li>Quick notes</li>
+                            <li>Calendar view</li>
+                            <li>Dark mode support</li>
+                            <li>Mobile-first design</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="modal-overlay" class="modal-overlay hidden">
+            <div id="modal" class="modal">
+                <div id="modal-header" class="modal-header">
+                    <h2 id="modal-title">Confirm</h2>
+                    <button id="modal-close" class="btn btn-icon" type="button">&times;</button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <p id="modal-message">Are you sure?</p>
+                </div>
+                <div id="modal-footer" class="modal-footer">
+                    <button id="modal-confirm" class="btn btn-danger" type="button">Confirm</button>
+                    <button id="modal-cancel" class="btn btn-secondary" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-container" class="toast-container"></div>
+
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div id="loading-spinner" class="spinner"></div>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
